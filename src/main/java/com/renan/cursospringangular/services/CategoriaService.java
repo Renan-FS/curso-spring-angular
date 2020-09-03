@@ -3,10 +3,12 @@ package com.renan.cursospringangular.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.renan.cursospringangular.domain.Categoria;
 import com.renan.cursospringangular.repositories.CategoriaRepository;
+import com.renan.cursospringangular.services.exceptions.DataIntegrityException;
 import com.renan.cursospringangular.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -28,5 +30,15 @@ public class CategoriaService {
 	
 	public Categoria update(Categoria obj) {
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categooria que possui produtos");
+		}
 	}
 }
