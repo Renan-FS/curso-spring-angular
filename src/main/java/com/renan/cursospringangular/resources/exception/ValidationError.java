@@ -1,10 +1,7 @@
-package com.renan.cursospringangular.resources;
+package com.renan.cursospringangular.resources.exception;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.renan.cursospringangular.resources.exception.FieldMessage;
-import com.renan.cursospringangular.resources.exception.StandardError;
 
 public class ValidationError extends StandardError {
 	private static final long serialVersionUID = 1L;

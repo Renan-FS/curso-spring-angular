@@ -3,8 +3,11 @@ package com.renan.cursospringangular.services;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.springframework.stereotype.Service;
+
 import com.renan.cursospringangular.domain.PagamentoComBoleto;
 
+@Service
 public class BoletoService {
 	
 	public void preencherPagamentoComBoleto(PagamentoComBoleto pagto, Date instanteDoPedido) {

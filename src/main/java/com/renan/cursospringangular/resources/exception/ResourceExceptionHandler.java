@@ -9,7 +9,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.renan.cursospringangular.resources.ValidationError;
 import com.renan.cursospringangular.services.exceptions.DataIntegrityException;
 import com.renan.cursospringangular.services.exceptions.ObjectNotFoundException;
 
