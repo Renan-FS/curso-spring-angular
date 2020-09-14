@@ -136,10 +136,10 @@ public class Pedido implements Serializable{
 
 	@Override
 	public String toString() {
-		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		StringBuilder builder = new StringBuilder();
-		builder.append("Pedido numero: ");
+		builder.append("Pedido número: ");
 		builder.append(getId());
 		builder.append(", Instante: ");
 		builder.append(sdf.format(getInstante()));
@@ -151,7 +151,7 @@ public class Pedido implements Serializable{
 		for (ItemPedido ip : getItens()) {
 			builder.append(ip.toString());
 		}
-		builder.append("Valor total:");
+		builder.append("Valor total: ");
 		builder.append(nf.format(getValorTotal()));
 		return builder.toString();
 	}
