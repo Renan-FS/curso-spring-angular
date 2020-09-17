@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 import com.renan.cursospringangular.domain.Cidade;
 import com.renan.cursospringangular.domain.Cliente;
 import com.renan.cursospringangular.domain.Endereco;
+import com.renan.cursospringangular.domain.Perfil;
 import com.renan.cursospringangular.domain.enums.TipoCliente;
 import com.renan.cursospringangular.dto.ClienteDTO;
 import com.renan.cursospringangular.dto.ClienteNewDTO;
 import com.renan.cursospringangular.repositories.ClienteRepository;
 import com.renan.cursospringangular.repositories.EnderecoRepository;
+import com.renan.cursospringangular.security.UserSS;
+import com.renan.cursospringangular.services.exceptions.AuthorizationException;
 import com.renan.cursospringangular.services.exceptions.DataIntegrityException;
 import com.renan.cursospringangular.services.exceptions.ObjectNotFoundException;
 
@@ -36,6 +39,12 @@ public class ClienteService {
 
 	
 	public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
